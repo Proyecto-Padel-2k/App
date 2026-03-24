@@ -9,7 +9,7 @@ export default function App() {
       <View style={styles.demoBox}>
         <Text style={styles.robotoText}>Fuente: Roboto</Text>
         <Text style={styles.montserratText}>Fuente: Montserrat</Text>
-        <Icon name="sports-tennis" size={40} color="#ffff" />
+        <Icon name="sports-tennis" size={40} color="#0000" />
       </View>
       <Inicio />
     </View>
