@@ -70,26 +70,26 @@ export const styles = StyleSheet.create({
   torneo: { color: "#ffff", fontWeight: "bold" },
 
   row: { flexDirection: "row", justifyContent: "space-between" },
-  progressHeader: { color: "#ffff", fontSize: 18, fontWeight: "bold" },
-  progressLabel: { color: "#ffff", fontSize: 14, fontWeight: "bold" },
-  progressValue: { fontSize: 18, fontWeight: "bold", color: "#ffff" },
-  progressMatches: { fontSize: 20, fontWeight: "bold", color: "#ffff" },
-  progressSub: { color: "#A8E000" },
+  progressHeader: { color: "#ffff", fontSize: 18, fontFamily: "Montserrat-Bold" },
+  progressLabel: { color: "#ffff", fontSize: 14, fontFamily: "Roboto-Bold" },
+  progressValue: { fontSize: 18, fontFamily: "Montserrat-Bold", color: "#ffff" },
+  progressMatches: { fontSize: 20, fontFamily: "Montserrat-Bold", color: "#ffff" },
+  progressSub: { color: "#A8E000", fontFamily: "Roboto-Regular" },
 
   playerRow: {
     flexDirection: "row",
     justifyContent: "space-between",
     marginBottom: 15,
   },
-  playerName: { fontSize: 16, fontWeight: "bold", color: "#ffff" },
-  playerLevel: { color: "#A8E000" },
+  playerName: { fontSize: 16, fontFamily: "Montserrat-SemiBold", color: "#ffff" },
+  playerLevel: { color: "#A8E000", fontFamily: "Roboto-Regular" },
   inviteButton: {
     backgroundColor: "#A8E000",
     paddingVertical: 6,
     paddingHorizontal: 12,
     borderRadius: 8,
   },
-  inviteText: { color: "#000000", fontWeight: "bold" },
+  inviteText: { color: "#000000", fontFamily: "Montserrat-SemiBold" },
 
   rowContainer: {
     flexDirection: "row",
