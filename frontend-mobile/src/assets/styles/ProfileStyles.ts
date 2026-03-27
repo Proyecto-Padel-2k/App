@@ -353,5 +353,76 @@ export const styles = StyleSheet.create({
     height: 1,
     backgroundColor: "#2C2C2E",
     marginVertical: 15,
+  },
+
+  // Modal Styles
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: "rgba(0,0,0,0.8)",
+    justifyContent: "flex-end",
+  },
+  modalContent: {
+    backgroundColor: "#1C1C1E",
+    borderTopLeftRadius: 24,
+    borderTopRightRadius: 24,
+    padding: 24,
+    maxHeight: "90%",
+  },
+  modalHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 20,
+  },
+  modalTitle: {
+    color: "#FFF",
+    fontSize: 20,
+    fontFamily: "Montserrat-Bold",
+  },
+  inputGroup: {
+    marginBottom: 16,
+  },
+  inputLabel: {
+    color: "#8E8E93",
+    fontSize: 12,
+    marginBottom: 8,
+    fontFamily: "Montserrat-Medium",
+  },
+  modalInput: {
+    backgroundColor: "#2C2C2E",
+    borderRadius: 8,
+    color: "#FFF",
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    fontSize: 16,
+    fontFamily: "Roboto-Regular",
+  },
+  saveButton: {
+    backgroundColor: "#A8E000",
+    borderRadius: 8,
+    paddingVertical: 16,
+    alignItems: "center",
+    marginTop: 10,
+    marginBottom: 20,
+  },
+  saveButtonText: {
+    color: "#000",
+    fontSize: 16,
+    fontFamily: "Montserrat-Bold",
+  },
+  changePhotoButton: {
+    backgroundColor: "#2C2C2E",
+    borderRadius: 8,
+    paddingVertical: 12,
+    alignItems: "center",
+    marginBottom: 16,
+    borderWidth: 1,
+    borderColor: "#A8E000",
+    borderStyle: "dashed",
+  },
+  changePhotoText: {
+    color: "#A8E000",
+    fontSize: 14,
+    fontFamily: "Montserrat-Medium",
   }
 });
