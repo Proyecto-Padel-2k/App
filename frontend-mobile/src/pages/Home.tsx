@@ -1,10 +1,13 @@
 import React from "react";
 import { View, Text, TouchableOpacity, ScrollView, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useNavigate } from "react-router-native";
 import LinearGradient from "react-native-linear-gradient";
 import { styles } from "../assets/styles/HomeStyles";
 
 export default function Home() {
+  const navigate = useNavigate();
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#000000" }}>
       <ScrollView style={styles.container}>
@@ -34,7 +37,7 @@ export default function Home() {
             <Text style={styles.title}>JUEGA Y <Text style={styles.highlightText}>GANA</Text></Text>
             <Text style={styles.subtitle}>Encuentra partidos y torneos</Text>
 
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity style={styles.button} onPress={() => navigate('/matches')} activeOpacity={0.8}>
               <Text style={styles.buttonText}>Buscar Partido</Text>
             </TouchableOpacity>
           </View>
@@ -64,7 +67,7 @@ export default function Home() {
 
             <Text style={styles.torneo}>Torneo Open 2022</Text>
             <Text style={styles.time}>Sábado 15 Ene</Text>
-            <TouchableOpacity style={styles.linkButton}>
+            <TouchableOpacity style={styles.linkButton} onPress={() => navigate('/matches')} activeOpacity={0.8}>
               <Text style={styles.linkText}>Ver Más</Text>
             </TouchableOpacity>
           </View>

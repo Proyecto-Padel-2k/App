@@ -8,7 +8,7 @@ export default function BottomNav() {
   const navigate = useNavigate();
 
   const tabs = [
-    { name: "Home", icon: "home", path: "/" },
+    { name: "Home", icon: "home", path: "/home" },
     { name: "Matches", icon: "tennis", path: "/matches" },
     { name: "Chats", icon: "chat", path: "/chats" },
     { name: "Profile", icon: "account", path: "/profile" },

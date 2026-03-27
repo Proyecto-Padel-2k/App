@@ -119,6 +119,6 @@ dependencies {
 }
 
 project.ext.vectoricons = [
-    iconFontNames: [ 'MaterialIcons.ttf' ] // Limiting to Material Icons as requested
+    iconFontNames: [ 'MaterialIcons.ttf', 'MaterialCommunityIcons.ttf' ] // Added MaterialCommunityIcons
 ]
 apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"

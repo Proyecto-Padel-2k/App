@@ -1,16 +1,74 @@
-import React from "react";
-import { View, Text, ScrollView, Image, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
+import { View, Text, ScrollView, Image, TouchableOpacity, Modal, TextInput, KeyboardAvoidingView, Platform } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { styles } from "../assets/styles/ProfileStyles";
 import { colors } from "../assets/styles/theme";
 
-export default function Profile() {
+const LEVELS = ["Iniciación", "Básico", "Intermedio", "Alto", "Avanzado"];
+
+const CustomDropdown = ({ label, value, onSelect }: { label: string, value: string, onSelect: (v: string) => void }) => {
+  const [isOpen, setIsOpen] = useState(false);
   return (
-    <ScrollView style={styles.container} contentContainerStyle={{ paddingBottom: 40 }}>
+    <View style={styles.inputGroup}>
+      <Text style={styles.inputLabel}>{label}</Text>
+      <TouchableOpacity 
+        style={[styles.modalInput, { flexDirection: "row", justifyContent: "space-between", alignItems: "center" }]} 
+        onPress={() => setIsOpen(!isOpen)}
+        activeOpacity={0.8}
+      >
+        <Text style={{ color: "#FFF", fontSize: 16 }}>{value || "Seleccionar Nivel"}</Text>
+        <MaterialCommunityIcons name={isOpen ? "chevron-up" : "chevron-down"} size={20} color="#8E8E93" />
+      </TouchableOpacity>
+      {isOpen && (
+        <View style={{ backgroundColor: "#2C2C2E", borderRadius: 8, marginTop: 4, overflow: "hidden" }}>
+          {LEVELS.map((lvl) => (
+            <TouchableOpacity 
+              key={lvl} 
+              style={{ padding: 12, borderBottomWidth: 1, borderBottomColor: "#1C1C1E" }}
+              onPress={() => {
+                onSelect(lvl);
+                setIsOpen(false);
+              }}
+            >
+              <Text style={{ color: value === lvl ? "#A8E000" : "#FFF", fontSize: 16 }}>{lvl}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+      )}
+    </View>
+  );
+};
+
+export default function Profile() {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [profile, setProfile] = useState({
+    name: "Carlos García",
+    username: "@carlosg",
+    avatar: "https://randomuser.me/api/portraits/men/32.jpg",
+    futbolLevel: "Intermedio",
+    baloncestoLevel: "Básico",
+    padelLevel: "Avanzado"
+  });
+
+  const [editForm, setEditForm] = useState(profile);
+
+  const handleOpenModal = () => {
+    setEditForm(profile);
+    setModalVisible(true);
+  };
+
+  const handleSave = () => {
+    setProfile(editForm);
+    setModalVisible(false);
+  };
+
+  return (
+    <>
+      <ScrollView style={styles.container} contentContainerStyle={{ paddingBottom: 40 }}>
       {/* Header */}
       <View style={styles.header}>
         <Text style={styles.greeting}>¡Hola, Carlos!</Text>
-        <TouchableOpacity style={styles.editButton} activeOpacity={0.8}>
+        <TouchableOpacity style={styles.editButton} onPress={handleOpenModal} activeOpacity={0.8}>
           <Text style={styles.editButtonText}>Editar Perfil</Text>
         </TouchableOpacity>
       </View>
@@ -19,12 +77,12 @@ export default function Profile() {
       <View style={styles.mainCard}>
         <View style={styles.avatarContainer}>
           <Image
-            source={{ uri: "https://randomuser.me/api/portraits/men/32.jpg" }}
+            source={{ uri: profile.avatar }}
             style={styles.avatar}
           />
         </View>
-        <Text style={styles.name}>Carlos García</Text>
-        <Text style={styles.username}>@carlosg</Text>
+        <Text style={styles.name}>{profile.name}</Text>
+        <Text style={styles.username}>{profile.username}</Text>
       </View>
 
       {/* Sport Cards */}
@@ -34,7 +92,7 @@ export default function Profile() {
         <View style={styles.sportDataRow}>
           <View style={styles.sportDataBox}>
             <Text style={styles.sportDataLabel}>Tu Nivel</Text>
-            <Text style={styles.sportDataValue}>Intermedio</Text>
+            <Text style={styles.sportDataValue}>{profile.futbolLevel}</Text>
           </View>
           <View style={styles.statsDividerVertical} />
           <View style={styles.sportDataBox}>
@@ -50,7 +108,7 @@ export default function Profile() {
         <View style={styles.sportDataRow}>
           <View style={styles.sportDataBox}>
             <Text style={styles.sportDataLabel}>Tu Nivel</Text>
-            <Text style={styles.sportDataValue}>Básico</Text>
+            <Text style={styles.sportDataValue}>{profile.baloncestoLevel}</Text>
           </View>
           <View style={styles.statsDividerVertical} />
           <View style={styles.sportDataBox}>
@@ -66,7 +124,7 @@ export default function Profile() {
         <View style={styles.sportDataRow}>
           <View style={styles.sportDataBox}>
             <Text style={styles.sportDataLabel}>Tu Nivel</Text>
-            <Text style={styles.sportDataValue}>Avanzado</Text>
+            <Text style={styles.sportDataValue}>{profile.padelLevel}</Text>
           </View>
           <View style={styles.statsDividerVertical} />
           <View style={styles.sportDataBox}>
@@ -192,5 +250,63 @@ export default function Profile() {
       </View>
 
     </ScrollView>
+
+      {/* Edit Profile Modal */}
+      <Modal visible={modalVisible} animationType="slide" transparent={true} onRequestClose={() => setModalVisible(false)}>
+        <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={styles.modalOverlay}>
+          <View style={styles.modalContent}>
+            <View style={styles.modalHeader}>
+              <Text style={styles.modalTitle}>Editar Perfil</Text>
+              <TouchableOpacity onPress={() => setModalVisible(false)}>
+                <MaterialCommunityIcons name="close" size={24} color="#FFF" />
+              </TouchableOpacity>
+            </View>
+
+            <ScrollView showsVerticalScrollIndicator={false}>
+              <TouchableOpacity style={styles.changePhotoButton} activeOpacity={0.7} onPress={() => {
+                // Alternating avatar simulation mock
+                const altAvatar = editForm.avatar.includes("men") ? "https://randomuser.me/api/portraits/women/44.jpg" : "https://randomuser.me/api/portraits/men/32.jpg";
+                setEditForm({...editForm, avatar: altAvatar});
+              }}>
+                <Text style={styles.changePhotoText}>Cambiar Foto de Perfil</Text>
+              </TouchableOpacity>
+
+              <View style={styles.inputGroup}>
+                <Text style={styles.inputLabel}>NOMBRE</Text>
+                <TextInput style={styles.modalInput} value={editForm.name} onChangeText={(t) => setEditForm({...editForm, name: t})} placeholderTextColor="#8E8E93" />
+              </View>
+
+              <View style={styles.inputGroup}>
+                <Text style={styles.inputLabel}>USUARIO</Text>
+                <TextInput style={styles.modalInput} value={editForm.username} onChangeText={(t) => setEditForm({...editForm, username: t})} autoCapitalize="none" placeholderTextColor="#8E8E93" />
+              </View>
+
+              <CustomDropdown
+                label="NIVEL FÚTBOL"
+                value={editForm.futbolLevel}
+                onSelect={(val) => setEditForm({...editForm, futbolLevel: val})}
+              />
+
+              <CustomDropdown
+                label="NIVEL BALONCESTO"
+                value={editForm.baloncestoLevel}
+                onSelect={(val) => setEditForm({...editForm, baloncestoLevel: val})}
+              />
+
+              <CustomDropdown
+                label="NIVEL PÁDEL"
+                value={editForm.padelLevel}
+                onSelect={(val) => setEditForm({...editForm, padelLevel: val})}
+              />
+
+              <TouchableOpacity style={styles.saveButton} onPress={handleSave} activeOpacity={0.8}>
+                <Text style={styles.saveButtonText}>Guardar Cambios</Text>
+              </TouchableOpacity>
+            </ScrollView>
+          </View>
+        </KeyboardAvoidingView>
+      </Modal>
+
+    </>
   );
 }
