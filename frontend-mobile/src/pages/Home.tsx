@@ -2,9 +2,9 @@ import React from "react";
 import { View, Text, TouchableOpacity, ScrollView, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import LinearGradient from "react-native-linear-gradient";
-import { styles } from "../assets/styles/InicioStyles";
+import { styles } from "../assets/styles/HomeStyles";
 
-export default function Inicio() {
+export default function Home() {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#000000" }}>
       <ScrollView style={styles.container}>
@@ -124,14 +124,6 @@ export default function Inicio() {
               <Text style={styles.inviteText}>Invitar</Text>
             </TouchableOpacity>
           </View>
-        </View>
-
-        {/* Bottom Navigation (mock) */}
-        <View style={styles.bottomNav}>
-          <Text style={styles.navItem}>Inicio</Text>
-          <Text style={styles.navItem}>Partidos</Text>
-          <Text style={styles.navItem}>Torneos</Text>
-          <Text style={styles.navItem}>Perfil</Text>
         </View>
 
       </ScrollView>
