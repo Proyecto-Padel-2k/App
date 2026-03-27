@@ -103,13 +103,4 @@ export const styles = StyleSheet.create({
     borderRadius: 12,
     width: "48%",
   },
-
-  bottomNav: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    paddingVertical: 15,
-    marginTop: 20,
-    borderRadius: 12,
-  },
-  navItem: { fontFamily: 'Montserrat-Bold', color: "#1e90ff" },
 });

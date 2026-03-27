@@ -1,6 +1,11 @@
 import React from "react";
-import Inicio from "./src/pages/Inicio";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import Router from "./src/components/Router";
 
-export default function App() { 
-  return <Inicio />;
+export default function App() {
+  return (
+    <SafeAreaProvider>
+      <Router />
+    </SafeAreaProvider>
+  );
 }
